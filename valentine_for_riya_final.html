@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okay Fine... Maybe I Was Flirting 😏</title>
+    <style>
+        :root {
+            --pink: #FFB3D9;
+            --soft-pink: #FFE5F1;
+            --coral: #FF8FAB;
+            --beige: #FFF5E4;
+            --soft-red: #FF6B9D;
+            --cream: #FFFEF9;
+            --text: #5A4A4A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--beige) 100%);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            color: var(--soft-red);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: var(--text);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            color: var(--soft-red);
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Question Section */
+        .question-section {
+            text-align: center;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        .question-section h2 {
+            font-size: 2.5em;
+            color: var(--soft-red);
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .yes-btn, .no-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, var(--soft-red) 0%, var(--coral) 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+        }
+
+        .no-btn {
+            background: #e0e0e0;
+            color: var(--text);
+            position: absolute;
+            transition: all 0.2s ease;
+        }
+
+        /* Love Letter Section */
+        .letter-section {
+            margin: 60px auto;
+            max-width: 700px;
+        }
+
+        .envelope {
+            background: var(--cream);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .envelope:hover {
+            transform: translateY(-5px);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--pink);
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transition: transform 0.5s ease;
+            transform-origin: top;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .letter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            padding: 0 20px;
+        }
+
+        .envelope.open .letter-content {
+            max-height: 1000px;
+            padding: 20px;
+        }
+
+        .letter-content h3 {
+            color: var(--soft-red);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .letter-content p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        /* Date Plans */
+        .date-plans {
+            margin: 60px auto;
+            max-width: 900px;
+        }
+
+        .date-plans h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--soft-red);
+            margin-bottom: 40px;
+        }
+
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .date-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .date-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .date-item h3 {
+            color: var(--soft-red);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .date-item p {
+            line-height: 1.6;
+        }
+
+        /* Reasons Section */
+        .reasons {
+            margin: 60px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .reasons h2 {
+            font-size: 2.5em;
+            color: var(--soft-red);
+            margin-bottom: 40px;
+        }
+
+        .reason-container {
+            margin: 20px 0;
+        }
+
+        .reason-btn {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--coral) 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 179, 217, 0.4);
+        }
+
+        .reason-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 179, 217, 0.6);
+        }
+
+        .reason-message {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 15px;
+            background: white;
+            border-radius: 15px;
+            padding: 0 20px;
+        }
+
+        .reason-message.revealed {
+            max-height: 200px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .reason-message p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .footer p {
+            font-size: 1.1em;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message h2 {
+            font-size: 3em;
+            color: var(--soft-red);
+            margin-bottom: 20px;
+        }
+
+        .success-message p {
+            font-size: 1.5em;
+            color: var(--text);
+        }
+
+        .hearts {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--pink);
+            position: absolute;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .question-section h2 {
+                font-size: 2em;
+            }
+
+            .date-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💕 Hey Riya! 💕</h1>
+            <p class="subtitle">Remember when I said I wasn't flirting? 😅</p>
+            <p>Yeah... about that... I kinda was 😏</p>
+        </div>
+
+        <!-- Question Section -->
+        <div class="question-section" id="questionSection">
+            <h2>So... Be My Valentine? 🌹</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px; color: var(--text);">
+                (I promise this time I'm actually flirting 😄)
+            </p>
+            <div class="buttons">
+                <button class="yes-btn" onclick="handleYes()">Yes! 💖</button>
+                <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="shrinkButton()">No</button>
+            </div>
+        </div>
+
+        <!-- Success Message (Hidden Initially) -->
+        <div class="success-message" id="successMessage">
+            <div class="hearts">💕💖💗💓💝</div>
+            <h2>YESSS! 🎉</h2>
+            <p>You just made my day, Riya! 😊</p>
+            <p>Scroll down to see what I have planned for us... 💫</p>
+        </div>
+
+        <!-- Love Letter -->
+        <div class="letter-section">
+            <div class="envelope" onclick="toggleEnvelope(this)">
+                <div class="envelope-flap"></div>
+                <div style="text-align: center; padding: 20px; cursor: pointer;">
+                    <h3 style="color: var(--soft-red);">💌 A message from me to you</h3>
+                    <p style="font-size: 0.9em; margin-top: 10px;">(Click to open)</p>
+                </div>
+                <div class="letter-content">
+                    <h3>Hey Riya,</h3>
+                    <p>So... confession time: when I first DMed you saying your name was beautiful, I was 100% flirting. And when you called me out and I said "no I'm not" - yeah, I totally panicked 😂</p>
+                    <p>These past few weeks of getting to know you have been really cool. Our random text conversations, the reels we send each other, talking about music and movies - it's all been fun. And unlike some people (no shade to certain besties 😅), you actually gave me a chance, which I appreciate.</p>
+                    <p>I know we're literally oceans apart - me here in the USA and you in India - but honestly? That hasn't stopped me from really enjoying talking to you. You're into cool stuff, you're easy to talk to, and you make me smile even through a screen.</p>
+                    <p>So here's the deal: I like you, Riya. Yeah, the distance is real, but I think you're worth getting to know better. If you're open to it, I'd love to see where this could go - even if it means starting with video calls and online hangouts for now.</p>
+                    <p>No pressure at all! Just thought Valentine's Day was the perfect time to be honest about how I feel 😊</p>
+                    <p style="text-align: right; margin-top: 30px; font-style: italic;">From across the miles,<br>Riddhi 💕</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Date Plans -->
+        <div class="date-plans">
+            <h2>💑 Things We Could Do Together 💑</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px auto; font-size: 1.1em; color: var(--text);">
+                Yeah, the distance is real - but that doesn't mean we can't have fun together! Here are some ideas:
+            </p>
+            <div class="date-grid">
+                <div class="date-item">
+                    <h3>🎵 Listen Together</h3>
+                    <p>We could do a virtual music listening session - share our favorite songs, discover new artists, or even make playlists for each other!</p>
+                </div>
+                <div class="date-item">
+                    <h3>🎬 Movie Night</h3>
+                    <p>Watch the same movie at the same time over video call. Your pick or mine? We can pause and talk about it as we go!</p>
+                </div>
+                <div class="date-item">
+                    <h3>♟️ Online Chess Match</h3>
+                    <p>You'll probably destroy me at chess, but I'm willing to lose if it means spending time with you! Chess.com date? 😄</p>
+                </div>
+                <div class="date-item">
+                    <h3>📱 Video Call Dates</h3>
+                    <p>Just talking face-to-face (screen-to-screen?) over video. Getting to actually see each other while we chat sounds nice, right?</p>
+                </div>
+                <div class="date-item">
+                    <h3>🎮 Game Together</h3>
+                    <p>Any online games you like? We could play something fun together - co-op or competitive, whatever you're into!</p>
+                </div>
+                <div class="date-item">
+                    <h3>✨ Future Plans</h3>
+                    <p>And who knows? Maybe one day the distance won't be a thing and we can actually hang out in person! 🌎</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reasons -->
+        <div class="reasons">
+            <h2>💝 A Few Things I Appreciate About You 💝</h2>
+            
+            <div class="reason-container">
+                <button class="reason-btn" onclick="toggleReason(1)">Reason #1 💫</button>
+                <div class="reason-message" id="reason1">
+                    <p>You actually responded to my DM and gave me a chance. That's pretty cool of you! 🙏</p>
+                </div>
+            </div>
+
+            <div class="reason-container">
+                <button class="reason-btn" onclick="toggleReason(2)">Reason #2 💬</button>
+                <div class="reason-message" id="reason2">
+                    <p>Our text conversations are actually fun. You're not one of those people who gives one-word replies. I appreciate that! 😊</p>
+                </div>
+            </div>
+
+            <div class="reason-container">
+                <button class="reason-btn" onclick="toggleReason(3)">Reason #3 🎵</button>
+                <div class="reason-message" id="reason3">
+                    <p>Your taste in music is really cool! I love when you share songs or talk about artists you're into. 🎶</p>
+                </div>
+            </div>
+
+            <div class="reason-container">
+                <button class="reason-btn" onclick="toggleReason(4)">Reason #4 😂</button>
+                <div class="reason-message" id="reason4">
+                    <p>The reels we send each other are always on point. You get my humor, and that's rare! 👌</p>
+                </div>
+            </div>
+
+            <div class="reason-container">
+                <button class="reason-btn" onclick="toggleReason(5)">Reason #5 🌍</button>
+                <div class="reason-message" id="reason5">
+                    <p>The fact that we're 8,000 miles apart and I still want to talk to you says something, right? Distance is just a number! ✨</p>
+                </div>
+            </div>
+
+            <div class="reason-container">
+                <button class="reason-btn" onclick="toggleReason(6)">Reason #6 💖</button>
+                <div class="reason-message" id="reason6">
+                    <p>I like you, Riya. And I'm hoping maybe you'd give this a shot? Happy Valentine's Day! 🌹</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Made with genuine feelings (and some coding skills) by Riddhi 💕</p>
+            <p style="margin-top: 15px; font-style: italic;">For Riya - Happy Valentine's Day! 🌹</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">P.S. - Yes, I WAS flirting from the start. Surprise! 😏💖</p>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        
+        function handleYes() {
+            createConfetti();
+            document.getElementById('questionSection').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const maxX = window.innerWidth - btn.offsetWidth - 100;
+            const maxY = 200;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        function shrinkButton() {
+            const btn = document.getElementById('noBtn');
+            noClickCount++;
+            
+            const newSize = Math.max(0.3, 1 - (noClickCount * 0.15));
+            btn.style.transform = `scale(${newSize})`;
+            
+            const yesBtn = document.querySelector('.yes-btn');
+            const yesSize = 1 + (noClickCount * 0.15);
+            yesBtn.style.transform = `scale(${yesSize})`;
+            
+            if (noClickCount >= 6) {
+                btn.style.display = 'none';
+            }
+        }
+
+        function toggleEnvelope(element) {
+            element.classList.toggle('open');
+        }
+
+        function toggleReason(num) {
+            const reason = document.getElementById('reason' + num);
+            reason.classList.toggle('revealed');
+        }
+
+        function createConfetti() {
+            const colors = ['#FFB3D9', '#FF8FAB', '#FF6B9D', '#FFE5F1', '#FFF5E4'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+    </script>
+</body>
+</html>
